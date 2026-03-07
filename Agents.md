@@ -1,4 +1,4 @@
-# Autonomous Labor Market Intelligence Agent
+# Autonomous Labor Market Intelligence Agent - LaborFlex
 
 ## Overview
 
