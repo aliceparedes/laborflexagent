@@ -116,12 +116,18 @@ Its responsibilities include:
 ##3 System Workflow
 The system follows a multi-stage analytical workflow:
 
-### 1. Data Ingestion The LaborDataAgent loads unemployment, wage, and job openings datasets from the data/ directory.
-### 2. Data Enrichment The agent retrieves occupational information from the O*NET API to add skill and occupation context.
-### 3. Indicator Analysis The EconomicAnalysisAgent evaluates each labor indicator individually, identifying trends and anomalies.
-### 4. Cross-Indicator Interpretation The system synthesizes signals across unemployment, wages, and job openings to detect broader labor market patterns.
-### 5. Executive Insight Generation Claude AI generates a structured interpretation of the labor market conditions.
-### 6. Report Generation The ReportAgent produces both Excel dashboards and a PDF briefing summarizing the analysis.
+### 1. Data Ingestion
+       The LaborDataAgent loads unemployment, wage, and job openings datasets from the data/ directory.
+### 2. Data Enrichment 
+       The agent retrieves occupational information from the O*NET API to add skill and occupation context.
+### 3. Indicator Analysis 
+       The EconomicAnalysisAgent evaluates each labor indicator individually, identifying trends and anomalies.
+### 4. Cross-Indicator Interpretation
+       The system synthesizes signals across unemployment, wages, and job openings to detect broader labor market patterns.
+### 5. Executive Insight Generation 
+       Claude AI generates a structured interpretation of the labor market conditions.
+### 6. Report Generation 
+       The ReportAgent produces both Excel dashboards and a PDF briefing summarizing the analysis.
 
 ## Economic Framework
 
