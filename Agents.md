@@ -24,12 +24,37 @@ By combining unemployment, wage, job openings, and occupation-level skill data, 
 
 Such insights are valuable for labor economists, workforce planners, policymakers, and organizations seeking to understand emerging labor market trends.
 
-
-
-
 ## Research Question
 
-> **How do labor market conditions evolve across occupations and sectors, and what structural trends are detectable from employment and wage data?**
+> **How can an autonomous AI agent detect and interpret structural changes in labor market conditions across sectors and occupations using unemployment, wage, job openings, and occupational skill data?**
+
+## End Users
+The outputs of this system are designed for users who need structured labor market intelligence rather than raw statistics. Potential users include:
+
+- Labor economists and economic researchers
+- Workforce development analysts
+- Policymakers and public institutions
+- Academic researchers studying labor markets
+- Firms or organizations evaluating hiring conditions and labor risks
+
+The system transforms raw labor statistics into interpretable outputs that support economic analysis and decision-making.
+
+## Why This System Is Agentic
+
+This project implements an agentic AI architecture in which multiple specialized agents perform distinct tasks within an autonomous workflow.
+
+Unlike a simple chatbot or reporting script, the system operates as a coordinated analytical pipeline in which agents interact to perform sequential tasks.
+
+The system autonomously:
+
+1. Ingests labor market datasets from local sources.
+2. Enriches those datasets with occupational intelligence from the O*NET Web Services API.
+3. Assigns analytical tasks to specialized agents.
+4. Interprets multiple labor indicators using economic reasoning.
+5. Synthesizes findings into coherent labor market insights.
+6. Generates professional reports without manual intervention.
+
+This multi-step reasoning workflow demonstrates how agentic AI can automate complex economic analysis processes rather than simply generating text responses.
 
 ## Agent Architecture
 
@@ -50,6 +75,81 @@ main.py (Orchestrator)
     ├── Excel: 5-sheet dashboard (openpyxl)
     └── PDF: Professional briefing (reportlab)
 ```
+## Agent Roles
+### LaborDataAgent
+The LaborDataAgent performs data ingestion and enrichment tasks.
+
+Its responsibilities include:
+
+- Loading labor market CSV datasets
+- Detecting and organizing economic indicators
+- Retrieving occupational profiles from the O*NET Web Services API
+- Preparing structured datasets for economic analysis
+
+This agent ensures the system integrates both quantitative labor market indicators and occupation-level intelligence.
+
+### Economic Analysis Agent
+The EconomicAnalysisAgent performs economic interpretation and analysis.
+
+Using Claude AI, the agent:
+
+- Analyzes unemployment trends
+- Interprets wage dynamics across sectors
+- Examines job openings and hiring patterns
+- Detects potential structural labor market signals
+- Identifies possible economic risks
+- Generates an executive summary of key findings
+
+This agent transforms raw labor data into meaningful economic insights.
+
+### Report Agent
+The ReportAgent generates structured output artifacts for the user.
+
+Its responsibilities include:
+
+- Creating a five-sheet Excel dashboard
+- Organizing economic insights alongside raw data
+- Generating a professional PDF executive briefing
+- Converting analysis results into user-ready reports
+- The outputs are designed to support economic interpretation and decision-making.
+
+##3 System Workflow
+The system follows a multi-stage analytical workflow:
+
+### 1. Data Ingestion The LaborDataAgent loads unemployment, wage, and job openings datasets from the data/ directory.
+### 2. Data Enrichment The agent retrieves occupational information from the O*NET API to add skill and occupation context.
+### 3. Indicator Analysis The EconomicAnalysisAgent evaluates each labor indicator individually, identifying trends and anomalies.
+### 4. Cross-Indicator Interpretation The system synthesizes signals across unemployment, wages, and job openings to detect broader labor market patterns.
+### 5. Executive Insight Generation Claude AI generates a structured interpretation of the labor market conditions.
+### 6. Report Generation The ReportAgent produces both Excel dashboards and a PDF briefing summarizing the analysis.
+
+## Economic Framework
+
+The system applies core labor economics concepts to interpret the data.
+
+### Unemployment and Labor Force Participation
+
+Unemployment reflects labor market slack, while labor force participation indicates the extent to which workers are engaged in the labor market. Changes in these indicators can signal shifts in labor supply or labor demand.
+
+### Wage Growth
+
+Wage growth can indicate labor market tightness, productivity changes, or sector-specific demand pressures. Diverging wage trends across sectors may reflect structural changes in labor demand.
+
+### Job Openings and Hires
+
+Job openings reflect employer demand for workers, while hires measure successful labor market matching. Differences between these indicators may reveal frictions or mismatches between labor supply and demand.
+
+### Occupational Skill Data
+
+O*NET occupational profiles provide information about required skills, job activities, and occupational demand. This data helps connect labor market outcomes with underlying structural workforce changes.
+
+### Structural vs Cyclical Interpretation
+
+- A central goal of the system is to distinguish between:
+- short-term cyclical labor market fluctuations
+- sector-specific demand changes
+- potential structural shifts in labor demand
+- emerging labor market risks related to occupational changes
 
 ## Data Sources
 
@@ -58,6 +158,68 @@ main.py (Orchestrator)
 | CSV files in `data/` | Local | Unemployment, wage, job opening data |
 | O*NET Web Services API | REST API | Occupation profiles, skills, demand signals |
 
+## Technical Implementation
+
+The system is implemented in Python and coordinated by an orchestration script (main.py) that manages communication between agents.
+
+### Core Technologies
+- Python (system orchestration and data handling)
+- Claude AI (economic reasoning and text generation)
+- openpyxl (Excel dashboard creation)
+- reportlab (PDF briefing generation)
+- O*NET Web Services API (occupational data enrichment)
+
+The modular architecture separates ingestion, analysis, and reporting tasks into independent agents, allowing the system to scale and incorporate additional agents in future versions.
+
+## Output Artifacts
+
+The system generates two primary outputs in the `outputs/`  directory.
+
+| File | Description |
+|------|-------------|
+| `labor_market_report_YYYYMM.xlsx` | Multi-sheet Excel dashboard summarizing labor market indicators and insights |
+| `labor_market_briefing_YYYYMM.pdf` | Executive briefing summarizing labor market conditions |
+
+### Excel Dashboard Structure
+
+The Excel dashboard includes five sheets:
+- Executive Summary – key findings and indicators
+- Unemployment Data – unemployment trends and charts
+- Wage Growth – sector wage analysis
+- Occupation Profiles – O*NET occupation data and structural insights
+- Risk Factors – AI-identified labor market risks
+
+These outputs provide structured labor market intelligence that can support economic interpretation and decision-making.
+
+## Supported Input Data
+
+The system supports the following input files:
+- `data/unemployment.csv`
+- `data/wage_growth.csv`
+- `data/job_openings.csv`
+
+Example formats:
+
+### unemployment.csv
+```csv
+date,unemployment_rate,labor_force_participation
+2024-01-01,3.7,62.5
+2024-02-01,3.9,62.4
+```
+
+### wage_growth.csv
+```csv
+date,sector,avg_hourly_wage,yoy_wage_growth_pct
+2024-01-01,Healthcare,29.5,4.8
+2024-01-01,Technology,47.0,6.5
+```
+
+### job_openings.csv
+```csv
+date,total_openings_millions,hires_millions
+2024-01-01,9.5,6.1
+2024-02-01,9.3,6.0
+```
 ## Setup
 
 ### 1. Install dependencies
@@ -96,48 +258,29 @@ If no CSVs are found, sample data is used automatically.
 ```bash
 python main.py
 ```
+Outputs will be saved automatically to the `outputs/` directory.
 
-## Outputs
+## Limitations
 
-All outputs saved to `outputs/`:
+This system has several limitations:
+- It relies on the quality and completeness of the input datasets.
+- The system provides economic interpretation rather than causal econometric estimation.
+- Forecasting capabilities are not currently implemented.
+- Results should be interpreted as analytical insights rather than definitive economic predictions.
 
-| File | Description |
-|------|-------------|
-| `labor_market_report_YYYYMM.xlsx` | 5-sheet Excel dashboard |
-| `labor_market_briefing_YYYYMM.pdf` | PDF executive briefing |
+##Future Extensions
 
-### Excel Sheets
-1. **Executive Summary** — AI-generated KPIs and headline findings
-2. **Unemployment Data** — Raw data + AI trend insight + chart
-3. **Wage Growth** — Sector wage data + AI wage insight
-4. **Occupation Profiles** — O*NET occupation data + structural analysis
-5. **Risk Factors** — AI-identified labor market risks
+Potential improvements to the system include:
+- Policy monitoring agents that track labor policy announcements
+- Forecasting models using regression or time-series techniques
+- Expanded O*NET occupation queries for sector-specific analysis
+- Regional labor market analysis using state or metropolitan datasets
+- Interactive dashboards for real-time labor market exploration
 
-## CSV Format Examples
+## Conclusion
 
-### unemployment.csv
-```csv
-date,unemployment_rate,labor_force_participation
-2024-01-01,3.7,62.5
-2024-02-01,3.9,62.4
-```
+The Autonomous Labor Market Intelligence Agent demonstrates how agentic AI can support economic analysis by integrating multiple labor market indicators, occupational intelligence, and automated reporting tools into a unified workflow.
 
-### wage_growth.csv
-```csv
-date,sector,avg_hourly_wage,yoy_wage_growth_pct
-2024-01-01,Healthcare,29.5,4.8
-2024-01-01,Technology,47.0,6.5
-```
+By combining labor data with economic reasoning, the system transforms raw statistics into structured insights that help users understand whether labor market changes appear cyclical, sector-specific, or structural.
 
-### job_openings.csv
-```csv
-date,total_openings_millions,hires_millions
-2024-01-01,9.5,6.1
-2024-02-01,9.3,6.0
-```
-
-## Extending the System
-
-- **Add a Policy Monitoring Agent**: Scrape DOL/BLS news pages and feed announcements into the analysis prompt
-- **Add Forecasting**: Use ARIMA or simple regression on the CSV data before passing to the analysis agent
-- **Add More O*NET Queries**: Change `ONET_KEYWORDS` in `main.py` to search for occupations relevant to your sector
+This approach illustrates how agentic AI systems can expand the tools available to economists and policymakers for analyzing complex economic phenomena.
