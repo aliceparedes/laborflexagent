@@ -10,6 +10,8 @@ The Autonomous Labor Market Intelligence Agent is a multi-agent AI system design
 
 The system autonomously ingests labor market datasets, enriches them with occupational intelligence from the O*NET Web Services API, interprets labor market signals using Claude AI, and generates structured outputs in the form of Excel dashboards and PDF executive briefings.
 
+It is designed to run on a recurring schedule (for example monthly) so that labor market intelligence is refreshed automatically as new data becomes available.
+
 Rather than simply summarizing data, the agent identifies structural patterns and relationships across labor indicators to help interpret how labor markets are evolving over time. The goal is to transform fragmented labor statistics into clear economic insights that can support workforce analysis, policy interpretation, and labor market research.
 
 ## Economic Problem and Relevance
