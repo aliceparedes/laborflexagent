@@ -1,4 +1,6 @@
-# Autonomous Labor Market Intelligence Agent - LaborFlex
+# EconMind AI — LaborFlex
+Agentic AI System for Labor Market Intelligence
+Team: Eduardo Andrade
 
 ## Overview
 
